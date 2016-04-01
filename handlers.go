@@ -3,13 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"os"
-	"time"
 	"github.com/gorilla/mux"
+	"io"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -52,10 +52,10 @@ func ImageShow(w http.ResponseWriter, r *http.Request) {
 }
 
 /*test:
-	curl \
-	  -F "uploadfile=@DOSYA" \
-	  -F "location=santa' secret shop" \
-	  localhost:8080/images
+curl \
+  -F "uploadfile=@DOSYA" \
+  -F "location=santa' secret shop" \
+  localhost:8080/images
 */
 func ImageCreate(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(32 << 20)
@@ -63,24 +63,17 @@ func ImageCreate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
 	defer file.Close()
 	f, err := os.OpenFile("./uploads/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+	panic(err)
 	if err != nil {
-		fmt.Println(err)
-		return
 	}
 	defer f.Close()
 	io.Copy(f, file)
-
 	dir, err := os.Getwd()
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
-
 	t := RepoCreateImage(Image{Location: strings.Join(r.Form["location"], ""),
 		Path: dir + "/uploads/" + handler.Filename,
 		Date: time.Now()})
