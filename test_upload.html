@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <title>Upload file test biki birki</title>
+    <link rel="stylesheet" href="from bootstrap import magicly_make_my_site_bitiful" media="screen" title="title" charset="utf-8">
+</head>
+
+<body>
+    <strong>
+        curl \
+          -F "uploadfile=@DOSYA" \
+          -F "location=santa' secret shop" \
+          localhost:8080/images
+    </strong> yapmaliydin ne isin var burada?
+    <form enctype="multipart/form-data" action="http://localhost:8080/images" method="post">
+        <input type="file" name="uploadfile" />
+        <input type="Text" name="location" value="">
+        <input type="submit" value="upload" />
+    </form>
+</body>
+
+</html>
